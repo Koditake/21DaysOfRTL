@@ -11,9 +11,10 @@ module day2_tb ();
 
     day2 DAY2 (.*);
 
-    // Generate clock pattern
+    // Define clock characteristics
     always begin : clock
         clk = 1'b1;
+        // wait 5 time units
         #5;
         clk = 1'b0;
         #5;
@@ -21,21 +22,40 @@ module day2_tb ();
 
     // D-FF test
     initial begin : unit_test
+        // reset to 1
         reset = 1'b1;
+
+        // D-FF input to 0
         d_i = 1'b0;
+
+        // reset to 0 at next pos clk edge
         @(posedge clk);
         reset = 1'b0;
+
+        //D-FF input to 1 at next pos clk edge
         @(posedge clk);
         d_i = 1'b1;
+
+        // Change nothing next 2 clk
         @(posedge clk);
         @(posedge clk);
+
+        // reset to 1 at next pos clk edge
         @(negedge clk);
         reset = 1'b1;
+
+        // wait 1 clk
         @(posedge clk);
+
+        // reset to 0 at next pos clk edge
         @(posedge clk);
         reset = 1'b0;
+
+        // change nothing next 2 clk
         @(posedge clk);
         @(posedge clk);
+
+        //end simulation
         $finish();
     end
 
