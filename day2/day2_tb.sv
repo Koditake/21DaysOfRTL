@@ -56,7 +56,7 @@ module day2_tb ();
         @(posedge clk);
 
         //end simulation
-        $finish();
+        $stop();
     end
 
 endmodule
